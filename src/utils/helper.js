@@ -23,3 +23,10 @@ export const loader = async () => {
   console.log(username);
   return username;
 };
+
+export const checkExpiry = (cardMonth, cardYear) => {
+  const date = new Date();
+  const year = date.toLocaleString("default", { year: "2-digit" });
+  const month = date.toLocaleString("default", { month: "2-digit" });
+  return cardYear >= year && cardMonth > month;
+};

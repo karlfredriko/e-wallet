@@ -21,6 +21,7 @@ export const Root = () => {
           28
         )}`,
         cvc: getRandomNumber(3),
+        issuer: "visa",
       })
     );
   }, []);
@@ -30,7 +31,7 @@ export const Root = () => {
       <main>
         <Outlet context={data} />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
