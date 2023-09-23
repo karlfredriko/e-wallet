@@ -26,12 +26,6 @@ const creditCardSlice = createSlice({
       state.creditCards[action.payload.index] = action.payload.creditCard;
     },
   },
-  // extraReducers: {
-  //   [getUser.fulfilled]: (state, action) => {
-  //     console.log("getUser fulfilled!");
-  //     // state.creditCards.push(action.payload);
-  //   },
-  // },
 });
 
 export const { addCreditCard, removeCreditCard, updateCreditCard } =

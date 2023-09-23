@@ -1,0 +1,63 @@
+/* CARD LAYOUT */
+.cardContainer {
+  position: relative;
+  min-width: 290px;
+  min-height: 185px;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  box-shadow: 5px 5px 4px -2px rgba(0, 0, 0, 0.75);
+  border-radius: 16px;
+}
+.cardStripe {
+  position: absolute;
+  top: 15%;
+  width: 100%;
+  min-height: 30px;
+  background-color: #1a1a1a;
+}
+.cardName {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+.cardIssuer {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 600;
+  top: 25%;
+  right: 5%;
+}
+.cardNumberContainer {
+  position: absolute;
+  width: 100%;
+  top: 48%;
+  left: 5%;
+}
+.cardNumber {
+  position: absolute;
+  font-size: 20px;
+  line-height: 18px;
+}
+.cardExpiryContainer {
+  position: absolute;
+  width: 50%;
+  top: 70%;
+  left: 5%;
+}
+.cardExpiryTitle,
+.cardCvcTitle,
+.cardNumberTitle {
+  position: absolute;
+  font-weight: 600;
+  font-size: 8px;
+}
+.cardExpiry,
+.cardCvc {
+  position: absolute;
+}
+.cardCvcContainer {
+  position: absolute;
+  width: 50%;
+  top: 70%;
+  right: 5%;
+}

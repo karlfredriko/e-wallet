@@ -1,5 +1,9 @@
 import { Outlet, useLoaderData } from "react-router-dom";
-import { getRandomNumber, randomIntFromInterval } from "../utils/helper";
+import {
+  getRandomNumber,
+  randomIntFromInterval,
+  randomValue,
+} from "../utils/helper";
 
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -10,18 +14,18 @@ import { addCreditCard } from "../features/cards/creditCardSlice";
 export const Root = () => {
   const data = useLoaderData();
   const { first, last } = data;
+  const issuerArr = ["VISA", "MasterCard", "Revolut"];
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       addCreditCard({
-        number: getRandomNumber(16),
         name: `${first} ${last}`,
-        expiry: `${randomIntFromInterval(1, 12)}/${randomIntFromInterval(
-          24,
-          28
-        )}`,
+        issuer: randomValue(issuerArr),
+        number: getRandomNumber(16),
+        month: randomIntFromInterval(1, 12),
+        year: randomIntFromInterval(24, 28),
         cvc: getRandomNumber(3),
-        issuer: "visa",
+        isActive: true,
       })
     );
   }, []);

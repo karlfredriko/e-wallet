@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { RenderOpt } from "../components/RenderOpt";
+import { RenderOpt } from "../features/cards/RenderOpt";
 import { checkExpiry } from "../utils/helper";
+import { PreviewCard } from "../features/cards/PreviewCard";
 
 export const AddCard = () => {
   const { first, last } = useOutletContext();
-
-  const [formValues, setFormValues] = useState({
+  const initialValues = {
     number: "",
     name: `${first.toUpperCase()} ${last.toUpperCase()}`,
     cvc: "",
     month: "01",
     year: "23",
-    issuer: "VISA",
-  });
+    issuer: "",
+  };
+
+  const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -57,13 +59,24 @@ export const AddCard = () => {
     if (!checkExpiry(val.month, val.year)) {
       errors.expiry = "*Expiry Date is invalid";
     }
+    if (!val.issuer) {
+      errors.issuer = "*Card Vendor is required";
+    }
+    // console.log(errors);
     return errors;
   };
 
   return (
     <>
       <p>/addcard - route</p>
-      <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+      <PreviewCard
+        name={name}
+        issuer={issuer}
+        number={number}
+        month={month}
+        year={year}
+        cvc={cvc}
+      />
 
       <form className="relative" onSubmit={handleSubmit}>
         <label htmlFor="numberInput">Card Number</label>
@@ -113,10 +126,14 @@ export const AddCard = () => {
           value={issuer}
           onChange={handleInputChange}
         >
+          <option value="" disabled>
+            Choose One
+          </option>
           <option>VISA</option>
           <option>MasterCard</option>
           <option>Revolut</option>
         </select>
+        <p className="form-error issuer-error">{formErrors.issuer}</p>
         <button>Save Card</button>
       </form>
     </>

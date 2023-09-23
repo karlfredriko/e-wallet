@@ -30,3 +30,14 @@ export const checkExpiry = (cardMonth, cardYear) => {
   const month = date.toLocaleString("default", { month: "2-digit" });
   return cardYear >= year && cardMonth > month;
 };
+
+export const formatCardNumber = (number) => {
+  const groups = number.match(/.{1,4}/g);
+  const formattedNumber = groups ? groups.join(" ") : "";
+  return formattedNumber;
+};
+
+export const randomValue = (arr) => {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+};
