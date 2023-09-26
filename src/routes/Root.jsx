@@ -19,7 +19,7 @@ export const Root = () => {
   useEffect(() => {
     dispatch(
       addCreditCard({
-        name: `${first} ${last}`,
+        name: `${first.toUpperCase()} ${last.toUpperCase()}`,
         issuer: randomValue(issuerArr),
         number: getRandomNumber(16),
         month: randomIntFromInterval(1, 12),

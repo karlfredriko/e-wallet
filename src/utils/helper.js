@@ -15,7 +15,8 @@ export const getRandomNumber = (digit) => {
 };
 
 export const randomIntFromInterval = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  const randomInt = Math.floor(Math.random() * (max - min + 1) + min);
+  return randomInt.toString();
 };
 
 export const loader = async () => {
@@ -28,7 +29,11 @@ export const checkExpiry = (cardMonth, cardYear) => {
   const date = new Date();
   const year = date.toLocaleString("default", { year: "2-digit" });
   const month = date.toLocaleString("default", { month: "2-digit" });
-  return cardYear >= year && cardMonth > month;
+  if (cardYear === year) {
+    return cardMonth > month;
+  } else {
+    return true;
+  }
 };
 
 export const formatCardNumber = (number) => {

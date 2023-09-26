@@ -1,10 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getData } from "../../utils/helper";
-
-// export const getUser = createAsyncThunk("creditCardSlice/getUser", async () => {
-//   const user = await getData("https://randomuser.me/api");
-//   return user;
-// });
+import { createSlice } from "@reduxjs/toolkit";
 
 const creditCardSlice = createSlice({
   name: "creditCard",
@@ -21,13 +15,15 @@ const creditCardSlice = createSlice({
       // Ta bort ett kreditkortsobjekt från arrayen baserat på index
       state.creditCards.splice(action.payload, 1);
     },
-    updateCreditCard: (state, action) => {
-      // Uppdatera ett befintligt kreditkortsobjekt baserat på index
-      state.creditCards[action.payload.index] = action.payload.creditCard;
+    setActiveToFalse: (state) => {
+      state.creditCards = state.creditCards.map((card) => ({
+        ...card,
+        isActive: false,
+      }));
     },
   },
 });
 
-export const { addCreditCard, removeCreditCard, updateCreditCard } =
+export const { addCreditCard, removeCreditCard, setActiveToFalse } =
   creditCardSlice.actions;
 export default creditCardSlice.reducer;

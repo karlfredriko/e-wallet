@@ -1,35 +1,39 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { RenderOpt } from "../features/cards/RenderOpt";
 import { checkExpiry } from "../utils/helper";
 import { PreviewCard } from "../features/cards/PreviewCard";
+import { useDispatch } from "react-redux";
+import {
+  addCreditCard,
+  setActiveToFalse,
+} from "../features/cards/creditCardSlice";
 
 export const AddCard = () => {
   const { first, last } = useOutletContext();
-  const initialValues = {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [formValues, setFormValues] = useState({
     number: "",
     name: `${first.toUpperCase()} ${last.toUpperCase()}`,
     cvc: "",
     month: "01",
     year: "23",
     issuer: "",
-  };
-
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  });
 
   const { number, name, cvc, month, year, issuer } = formValues;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "issuer") {
-      setFormValues({ ...formValues, [name]: value });
-    } else {
-      const numericValue = value.replace(/[^0-9]/g, "");
-      setFormValues({ ...formValues, [name]: numericValue });
-    }
+    name === "isActive" ? setIsActive((preVal) => !preVal) : null;
+    name === "issuer"
+      ? setFormValues({ ...formValues, [name]: value })
+      : setFormValues({ ...formValues, [name]: value.replace(/[^0-9]/g, "") });
   };
 
   const handleSubmit = (e) => {
@@ -40,6 +44,11 @@ export const AddCard = () => {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
+      if (isActive) {
+        dispatch(setActiveToFalse());
+      }
+      dispatch(addCreditCard({ ...formValues, isActive }));
+      navigate("/cards");
     }
   }, [formErrors]);
 
@@ -68,7 +77,6 @@ export const AddCard = () => {
 
   return (
     <>
-      <p>/addcard - route</p>
       <PreviewCard
         name={name}
         issuer={issuer}
@@ -107,15 +115,17 @@ export const AddCard = () => {
             <p className="form-error">{formErrors.cvc}</p>
           </div>
           <div className="col relative">
-            <label>Valid Thru</label>
-            <div className="row">
-              <select name="month" value={month} onChange={handleInputChange}>
-                <RenderOpt total={12} startVal={1} context={"monthVal"} />
-              </select>
-              <select name="year" value={year} onChange={handleInputChange}>
-                <RenderOpt total={8} startVal={23} context={"yearVal"} />
-              </select>
-            </div>
+            <label>
+              Valid Thru
+              <div className="row">
+                <select name="month" value={month} onChange={handleInputChange}>
+                  <RenderOpt total={12} startVal={1} context={"monthVal"} />
+                </select>
+                <select name="year" value={year} onChange={handleInputChange}>
+                  <RenderOpt total={8} startVal={23} context={"yearVal"} />
+                </select>
+              </div>
+            </label>
             <p className="form-error">{formErrors.expiry}</p>
           </div>
         </div>
@@ -134,7 +144,17 @@ export const AddCard = () => {
           <option>Revolut</option>
         </select>
         <p className="form-error issuer-error">{formErrors.issuer}</p>
-        <button>Save Card</button>
+        <div className="row no-gap">
+          <input
+            type="checkbox"
+            name="isActive"
+            id="isActive"
+            checked={isActive}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="isActive">Set as Active?</label>
+          <button>Save Card</button>
+        </div>
       </form>
     </>
   );
