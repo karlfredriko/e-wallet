@@ -8,6 +8,7 @@
   border: 1px solid black;
   box-shadow: 5px 5px 4px -2px rgba(0, 0, 0, 0.75);
   border-radius: 16px;
+  background-color: bisque;
 }
 .cardStripe {
   position: absolute;
@@ -18,6 +19,7 @@
 }
 .cardName {
   position: absolute;
+  font-weight: 600;
   top: 30%;
   left: 5%;
 }
@@ -41,6 +43,7 @@
 }
 .cardExpiryContainer {
   position: absolute;
+  font-weight: 600;
   width: 50%;
   top: 70%;
   left: 5%;
@@ -58,6 +61,7 @@
 }
 .cardCvcContainer {
   position: absolute;
+  font-weight: 600;
   width: 50%;
   top: 70%;
   right: 5%;

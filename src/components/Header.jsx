@@ -3,12 +3,22 @@ import { NavLink } from "react-router-dom";
 export const Header = () => {
   return (
     <header>
-      <h1>
-        <NavLink to="/">E_Wallet</NavLink>
-      </h1>
+      <NavLink to="/">
+        <h1>E-Wallet</h1>
+      </NavLink>
       <nav>
-        <NavLink to="cards">My Wallet</NavLink>
-        <NavLink to="addcard">Add card</NavLink>
+        <NavLink to="cards">
+          <div className="col">
+            <i className="fa-solid fa-wallet" />
+            <small>wallet</small>
+          </div>
+        </NavLink>
+        <NavLink to="addcard">
+          <div className="col">
+            <i className="fa-regular fa-credit-card" />
+            <small>add</small>
+          </div>
+        </NavLink>
       </nav>
     </header>
   );

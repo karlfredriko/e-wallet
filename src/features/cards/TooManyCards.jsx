@@ -6,7 +6,7 @@ export const TooManyCards = () => {
   return (
     <>
       <h2>
-        The Wallet is full!
+        Your Wallet is full!
         <br /> Remove a card before adding more.
       </h2>
       <img
@@ -16,6 +16,7 @@ export const TooManyCards = () => {
         src="../src/assets/overflowing-wallet-2.png"
         alt="Picture of an overflowing wallet"
       />
+      <small>Oh no, the wallet is exploding. Get help.</small>
     </>
   );
 };
