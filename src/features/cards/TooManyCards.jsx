@@ -5,10 +5,10 @@ export const TooManyCards = () => {
 
   return (
     <>
-      <strong>
-        Wallet is full!
-        <br /> Remove a card before adding new.
-      </strong>
+      <h2>
+        The Wallet is full!
+        <br /> Remove a card before adding more.
+      </h2>
       <img
         onClick={() => {
           navigate("/cards");

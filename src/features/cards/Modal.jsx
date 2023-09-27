@@ -20,12 +20,10 @@ export const ModalComponent = ({
       <p>
         <strong>Make changes to this card?</strong>
       </p>
-      <p>id: {cardId}</p>
       <button className={s.gap} onClick={onMakeActive}>
         Make Active
       </button>
       <button onClick={onDelete}>Delete</button>
-      {/* <button onClick={onRequestClose}>Cancel</button> */}
     </Modal>
   );
 };
