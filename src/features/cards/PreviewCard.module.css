@@ -23,9 +23,9 @@
 }
 .cardIssuer {
   position: absolute;
-  font-size: 20px;
-  font-weight: 600;
-  top: 25%;
+  font-size: 3rem;
+  color: #1a1a1a;
+  bottom: 5%;
   right: 5%;
 }
 .cardNumberContainer {

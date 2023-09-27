@@ -12,7 +12,11 @@ import { useDispatch } from "react-redux";
 import { addCreditCard, getUser } from "../features/cards/creditCardSlice";
 
 export const Root = () => {
-  const [issuerArr, setIssuerArr] = useState(["VISA", "MasterCard", "Revolut"]);
+  const [issuerArr, setIssuerArr] = useState([
+    "fa-brands fa-cc-visa",
+    "fa-brands fa-cc-mastercard",
+    "fa-brands fa-cc-paypal",
+  ]);
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
 

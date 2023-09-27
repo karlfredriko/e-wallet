@@ -7,7 +7,7 @@ export const PreviewCard = ({ name, issuer, number, month, year, cvc }) => {
     <div className={s.cardContainer}>
       <div className={s.cardStripe}></div>
       <p className={s.cardName}>{name}</p>
-      <p className={s.cardIssuer}>{issuer}</p>
+      <i className={`${s.cardIssuer} ${issuer}`} />
       <div className={s.cardNumberContainer}>
         <p className={s.cardNumberTitle}>CARD NUMBER</p>
         <p className={s.cardNumber}>{formatCardNumber(number)}</p>

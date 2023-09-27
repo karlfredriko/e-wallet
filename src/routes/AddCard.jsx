@@ -140,9 +140,9 @@ export const AddCard = () => {
           <option value="" disabled>
             Choose One
           </option>
-          <option>VISA</option>
-          <option>MasterCard</option>
-          <option>Revolut</option>
+          <option value={"fa-brands fa-cc-visa"}>Visa</option>
+          <option value={"fa-brands fa-cc-mastercard"}>MasterCard</option>
+          <option value={"fa-brands fa-cc-paypal"}>PayPal</option>
         </select>
         <p className="form-error issuer-error">{formErrors.issuer}</p>
         <div className="row no-gap">
