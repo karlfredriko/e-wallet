@@ -19,7 +19,7 @@ const creditCardSlice = createSlice({
     addCreditCard: (state, action) => {
       const id = createId();
       const data = { ...action.payload, id };
-      console.log(data);
+      // console.log(data);
       state.creditCards.push(data);
     },
     removeCreditCard: (state, action) => {
@@ -42,7 +42,7 @@ const creditCardSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      console.log(state.user, "state.user updated");
+      // console.log(state.user, "state.user updated");
     });
   },
 });

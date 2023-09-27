@@ -13,7 +13,7 @@
   -webkit-text-size-adjust: 100%;
 }
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   text-align: center;
   place-items: center;
   display: flex;

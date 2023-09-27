@@ -2,7 +2,6 @@ import { v4 as uuid } from "uuid";
 
 export const createId = () => {
   const uniqueId = uuid().slice(0, 8);
-  console.log(uniqueId);
   return uniqueId;
 };
 

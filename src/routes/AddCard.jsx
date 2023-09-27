@@ -56,7 +56,7 @@ export const AddCard = () => {
 
   const validate = (val) => {
     const errors = {};
-    console.log("validate is running");
+    // console.log("validate is running");
     if (!val.number) {
       errors.number = "*Card Number is required";
     } else if (val.number.length < 16) {
