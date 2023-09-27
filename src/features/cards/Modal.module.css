@@ -1,0 +1,23 @@
+.content {
+  position: absolute;
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background-color: oldlace;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.gap {
+  margin-right: 1rem;
+}

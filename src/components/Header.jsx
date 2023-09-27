@@ -7,8 +7,8 @@ export const Header = () => {
         <NavLink to="/">E_Wallet</NavLink>
       </h1>
       <nav>
-        <NavLink to="/cards">My Wallet</NavLink>
-        <NavLink to="/addcard">Add card</NavLink>
+        <NavLink to="cards">My Wallet</NavLink>
+        <NavLink to="addcard">Add card</NavLink>
       </nav>
     </header>
   );

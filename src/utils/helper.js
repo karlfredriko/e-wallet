@@ -1,13 +1,9 @@
-import axios from "axios";
+import { v4 as uuid } from "uuid";
 
-export const getData = async (baseUrl) => {
-  try {
-    const res = await axios.get(baseUrl);
-    console.log("fetching data");
-    return res.data.results[0].name;
-  } catch (err) {
-    console.log("getData ERROR " + err);
-  }
+export const createId = () => {
+  const uniqueId = uuid().slice(0, 8);
+  console.log(uniqueId);
+  return uniqueId;
 };
 
 export const getRandomNumber = (digit) => {
@@ -17,12 +13,6 @@ export const getRandomNumber = (digit) => {
 export const randomIntFromInterval = (min, max) => {
   const randomInt = Math.floor(Math.random() * (max - min + 1) + min);
   return randomInt.toString();
-};
-
-export const loader = async () => {
-  const username = await getData("https://randomuser.me/api");
-  console.log(username);
-  return username;
 };
 
 export const checkExpiry = (cardMonth, cardYear) => {

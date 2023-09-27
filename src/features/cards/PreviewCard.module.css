@@ -1,5 +1,6 @@
 /* CARD LAYOUT */
 .cardContainer {
+  pointer-events: none;
   position: relative;
   min-width: 290px;
   min-height: 180px;

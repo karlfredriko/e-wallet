@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import {
   getRandomNumber,
   randomIntFromInterval,
@@ -7,35 +7,44 @@ import {
 
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addCreditCard } from "../features/cards/creditCardSlice";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCreditCard, getUser } from "../features/cards/creditCardSlice";
 
 export const Root = () => {
-  const data = useLoaderData();
-  const { first, last } = data;
-  const issuerArr = ["VISA", "MasterCard", "Revolut"];
+  const [issuerArr, setIssuerArr] = useState(["VISA", "MasterCard", "Revolut"]);
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(
-      addCreditCard({
-        name: `${first.toUpperCase()} ${last.toUpperCase()}`,
-        issuer: randomValue(issuerArr),
-        number: getRandomNumber(16),
-        month: randomIntFromInterval(1, 12),
-        year: randomIntFromInterval(24, 28),
-        cvc: getRandomNumber(3),
-        isActive: true,
+    dispatch(getUser())
+      .then((res) => {
+        const { first, last } = res.payload;
+        setUser(res.payload);
+        dispatch(
+          addCreditCard({
+            name: `${first.toUpperCase()} ${last.toUpperCase()}`,
+            issuer: randomValue(issuerArr),
+            number: getRandomNumber(16),
+            month: randomIntFromInterval(1, 12),
+            year: randomIntFromInterval(24, 28),
+            cvc: getRandomNumber(3),
+            isActive: true,
+          })
+        );
       })
-    );
+      .catch((error) => {
+        console.error("Fel vid hämtning av användardata:", error);
+      });
   }, []);
+
   return (
     <>
       <Header />
       <main>
-        <Outlet context={data} />
+        <Outlet context={user} />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

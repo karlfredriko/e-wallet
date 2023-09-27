@@ -3,16 +3,18 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { RenderOpt } from "../features/cards/RenderOpt";
 import { checkExpiry } from "../utils/helper";
 import { PreviewCard } from "../features/cards/PreviewCard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addCreditCard,
-  setActiveToFalse,
+  setAllToFalse,
 } from "../features/cards/creditCardSlice";
+import { TooManyCards } from "../features/cards/TooManyCards";
 
 export const AddCard = () => {
   const { first, last } = useOutletContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const creditCards = useSelector((state) => state.creditCard.creditCards);
 
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -45,7 +47,7 @@ export const AddCard = () => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       if (isActive) {
-        dispatch(setActiveToFalse());
+        dispatch(setAllToFalse());
       }
       dispatch(addCreditCard({ ...formValues, isActive }));
       navigate("/cards");
@@ -71,11 +73,10 @@ export const AddCard = () => {
     if (!val.issuer) {
       errors.issuer = "*Card Vendor is required";
     }
-    // console.log(errors);
     return errors;
   };
 
-  return (
+  return creditCards.length < 4 ? (
     <>
       <PreviewCard
         name={name}
@@ -157,5 +158,7 @@ export const AddCard = () => {
         </div>
       </form>
     </>
+  ) : (
+    <TooManyCards />
   );
 };
